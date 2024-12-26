@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16.2-bullseye
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aquarium
+      POSTGRES_HOST: localhost
+    ports:
+      - "127.0.0.1:5432:5432"
+    expose:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # go-app:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./_docker/dev/server/Dockerfile
+  #   command: go run main.go
+  #   volumes:
+  #     - .:/app
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     DB_HOST: db
+  #     DB_PORT: 5432
+  #     DB_USER: postgres
+  #     DB_PASSWORD: password
+  #     DB_NAME: aquarium
+
+volumes:
+  postgres_data:
